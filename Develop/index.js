@@ -1,14 +1,10 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const badge = require ("./utils/generateMarkdown");
-const { type } = require('os');
+const generateMarkdown = require ("./utils/generateMarkdown");
 
-// function to creat readme file
 
-const readGen = ({ title, bio, license, github, email}) =>
-`
-`
+
 
 // TODO: Create an array of questions for user input
 inquirer
@@ -18,11 +14,26 @@ inquirer
         name: "title",
         message: "What is your project name?",
      },
+     {
+       type: "input",
+       name: "installation",
+       message: "What did you use to accomplish this?"
+     },
         
      {
         type: "input",
         name: "bio",
         message: "Give a quick description of your application",
+     },
+     {
+      input: "input",
+      name: "usage",
+      message: "what useage should people have for this"
+     },
+     {
+      type: "input",
+      name: "dependecies",
+      message: "Which command should the user use to insall dependecies"
      },
      {
         type: "checkbox",
@@ -43,9 +54,9 @@ inquirer
      
     ])
     .then((answers) =>{
-        const generateRead = readGen(answers);
 
-        fs.writeFile("readme.md", generateRead, (err) =>
+        fs.writeFile("README.md", generateMarkdown(answers), (err) =>
         err ? console.log(err) : console.log("Success new readme created!")
         );
     });
+   
